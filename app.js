@@ -2,6 +2,7 @@ import dotenv from "dotenv";
 import express from "express";
 import { Client, GatewayIntentBits } from "discord.js";
 import reportError from "./reportError.js";
+import sendInfoMessage from "./sendInfoMessage.js";
 
 dotenv.config();
 
@@ -26,7 +27,7 @@ client.once("ready", () => {
  *
  * Expected JSON request body format:
  * {
- *   "discordChannelId": "1332606213506072669",             // Discord text channel ID
+ *   "discordChannelId": "<discord-channel-id>",             // Discord text channel ID
  *   "error": {
  *     "traceId": "1"                                       // Trace ID
  *     "type": "https://myapi.com/docs/errors/auth-failed"  // URI reference
@@ -54,6 +55,37 @@ app.post("/report-error", async (req, res) => {
 
   // Send error message to the discord channel
   const isSent = await reportError(discordChannel, error, trace);
+  if (isSent)
+    return res.status(200).json({ message: "Message sent to Discord channel" });
+  else return res.status(500).json({ message: "Unknown Error occured" });
+});
+
+/**
+ * Endpoint for sending server infos to the Discord channel
+ *
+ * Expected JSON request body format:
+ * {
+ *   "discordChannelId": "<discord-channel-id>",  // Discord text channel ID
+ *   "info": {
+ *     "message": "The server is now online."     // Message to send
+ *   }
+ * }
+ */
+app.post("/info", async (req, res) => {
+  const { discordChannelId, info } = req.body;
+
+  // Check discordChannelId exists in request
+  if (!discordChannelId)
+    return res.status(400).json({ message: "discordChannelId is not set" });
+
+  const discordChannel = await client.channels.fetch(discordChannelId);
+
+  // Check discordChannelId is valid
+  if (!discordChannel || !discordChannel.isTextBased())
+    return res.status(400).json({ message: "Invalid channel ID" });
+
+  // Send error message to the discord channel
+  const isSent = await sendInfoMessage(discordChannel, info);
   if (isSent)
     return res.status(200).json({ message: "Message sent to Discord channel" });
   else return res.status(500).json({ message: "Unknown Error occured" });
