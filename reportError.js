@@ -10,7 +10,7 @@ function createErrorEmbed(error) {
 
   const embed = new EmbedBuilder()
     .setColor(getColorByStatus(status))
-    .setTitle(`${title || "Unknown Error"}`)
+    .setTitle(`🚨 ${title || "Unknown Error"}`)
     .setDescription(detail || "*No detail provided.*")
     .addFields(
       {
@@ -49,7 +49,7 @@ async function reportError(discordChannel, error, trace) {
     const embed = createErrorEmbed(error);
     await discordChannel.send({ embeds: [embed] });
     console.log(
-      `📨 Error reported to ${discordChannel.guild.name}/${
+      `🚀 Error reported to ${discordChannel.guild.name}/${
         discordChannel.name
       } ${discordChannel.toString()}`
     );

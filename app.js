@@ -91,4 +91,4 @@ app.post("/info", async (req, res) => {
   else return res.status(500).json({ message: "Unknown Error occured" });
 });
 
-app.listen(PORT, () => console.log("🚀 Server running on port", PORT));
+app.listen(PORT, () => console.log("🟢 Server running on port", PORT));
