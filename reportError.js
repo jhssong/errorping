@@ -6,20 +6,39 @@ import { getColorByStatus, getStackTraceFile } from "./util/index.js";
 dotenv.config();
 
 function createErrorEmbed(error) {
-  const { type, title, status, detail, instance } = error;
+  const { traceId, type, title, status, detail, instance, method } = error;
 
   const embed = new EmbedBuilder()
     .setColor(getColorByStatus(status))
-    .setTitle(title)
+    .setTitle(`${title || "Unknown Error"}`)
+    .setDescription(detail || "*No detail provided.*")
     .addFields(
+      {
+        name: "Trace ID",
+        value: traceId ? `\`${traceId}\`` : "`N/A`",
+        inline: false,
+      },
+      {
+        name: "Type",
+        value: type ? `\`${type}\`` : "`N/A`",
+        inline: false,
+      },
+      {
+        name: "Method",
+        value: method ? `\`${method.toUpperCase()}\`` : "`N/A`",
+        inline: true,
+      },
       {
         name: "Status Code",
         value: `\`${status || "NULL"}\``,
         inline: true,
       },
-      { name: "Instance", value: `\`${instance}\`` }
+      {
+        name: "Instance",
+        value: instance ? `\`${instance}\`` : "`N/A`",
+        inline: false,
+      }
     )
-    .setDescription(detail)
     .setTimestamp();
 
   return embed;

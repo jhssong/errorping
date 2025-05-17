@@ -26,12 +26,15 @@ client.once("ready", () => {
  *
  * Expected JSON request body format:
  * {
- *   "discordChannelId": "1332606213506072669",      // Discord text channel ID
+ *   "discordChannelId": "1332606213506072669",             // Discord text channel ID
  *   "error": {
- *     "title": "Authentication Failed",             // Error title
- *     "status": 401,                                // HTTP status code
- *     "detail": "An invalid API key was provided.", // Detailed error message
- *     "instance": "/api/v2/users/me"                // API path where the error occurred
+ *     "traceId": "1"                                       // Trace ID
+ *     "type": "https://myapi.com/docs/errors/auth-failed"  // URI reference
+ *     "title": "Authentication Failed",                    // Error title
+ *     "status": 401,                                       // HTTP status code
+ *     "detail": "An invalid API key was provided.",        // Detailed error message
+ *     "instance": "/api/v2/users/me"                       // API path where the error occurred
+ *     "method": "POST"                                     // API method
  *   },
  *   "trace": "..." // (Optional) stack trace string; if too long, it will be sent as a file
  * }
