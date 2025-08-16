@@ -36,6 +36,6 @@ jobs:
           key: ${{ secrets.REMOTE_SSH_KEY }}
           port: ${{ secrets.REMOTE_SSH_PORT }}
           script: |
-            cd /home/${{ secrets.REMOTE_SSH_USERNAME }}/Projects
+            cd /home/${{ secrets.REMOTE_SSH_USERNAME }}/Workspace
             docker compose pull errorping
             docker compose up -d errorping
