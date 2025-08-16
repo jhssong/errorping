@@ -1,4 +1,3 @@
-import dotenv from "dotenv";
 import { EmbedBuilder } from "discord.js";
 
 function createInfoEmbed(issue) {

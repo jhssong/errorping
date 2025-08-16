@@ -36,12 +36,11 @@ client.once("ready", () => {
  *     "detail": "An invalid API key was provided.",        // Detailed error message
  *     "instance": "/api/v2/users/me"                       // API path where the error occurred
  *     "method": "POST"                                     // API method
- *   },
- *   "trace": "..." // (Optional) stack trace string; if too long, it will be sent as a file
+ *   }
  * }
  */
 app.post("/report-error", async (req, res) => {
-  const { discordChannelId, error, trace } = req.body;
+  const { discordChannelId, error } = req.body;
 
   // Check discordChannelId exists in request
   if (!discordChannelId)
@@ -54,7 +53,7 @@ app.post("/report-error", async (req, res) => {
     return res.status(400).json({ message: "Invalid channel ID" });
 
   // Send error message to the discord channel
-  const isSent = await reportError(discordChannel, error, trace);
+  const isSent = await reportError(discordChannel, error);
   if (isSent)
     return res.status(200).json({ message: "Message sent to Discord channel" });
   else return res.status(500).json({ message: "Unknown Error occured" });

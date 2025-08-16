@@ -1,9 +1,12 @@
-import dotenv from "dotenv";
 import { EmbedBuilder } from "discord.js";
 
-import { getColorByStatus, getStackTraceFile } from "./util/index.js";
-
-dotenv.config();
+function getColorByStatus(status) {
+  return status >= 500
+    ? 0xff0000 // Server Error
+    : status >= 400
+    ? 0xffa500 // Client Error
+    : 0x0000ff; // Other Error
+}
 
 function createErrorEmbed(error) {
   const { traceId, type, title, status, detail, instance, method } = error;
@@ -44,7 +47,7 @@ function createErrorEmbed(error) {
   return embed;
 }
 
-async function reportError(discordChannel, error, trace) {
+async function reportError(discordChannel, error) {
   try {
     const embed = createErrorEmbed(error);
     await discordChannel.send({ embeds: [embed] });
@@ -53,17 +56,6 @@ async function reportError(discordChannel, error, trace) {
         discordChannel.name
       } ${discordChannel.toString()}`
     );
-
-    // Send stack trace if exists
-    if (trace) {
-      if (trace.length > 1000) {
-        // Send file if stack trace is too long
-        const file = await getStackTraceFile();
-        await discordChannel.send({ files: [file] });
-      } else {
-        await discordChannel.send(`\`\`\`\n${trace}\n\`\`\``);
-      }
-    }
   } catch (e) {
     console.error("Error occured in reportError.js");
     console.error(e);
