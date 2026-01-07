@@ -30,6 +30,17 @@ public class MethodArgumentNotValidExceptionResolver implements ExceptionResolve
                 : "";
     }
 
+    private boolean hasCustomMessage(String message) {
+        if (message == null) {
+            return false;
+        }
+
+        return !message.startsWith("{")
+                && !message.equals("must not be blank")
+                && !message.equals("must be a well-formed email address");
+    }
+
+
     @Override
     public boolean support(Throwable ex) {
         return ex instanceof MethodArgumentNotValidException;
@@ -43,6 +54,11 @@ public class MethodArgumentNotValidExceptionResolver implements ExceptionResolve
                 .map(error -> {
                     String field = error.getField();
                     String constraint = extractConstraint(error);
+
+                    String defaultMessage = error.getDefaultMessage();
+                    if (hasCustomMessage(defaultMessage)) {
+                        return defaultMessage;
+                    }
 
                     return MESSAGE_GENERATORS
                             .getOrDefault(constraint,
