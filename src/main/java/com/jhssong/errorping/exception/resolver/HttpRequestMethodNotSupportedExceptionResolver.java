@@ -2,6 +2,7 @@ package com.jhssong.errorping.exception.resolver;
 
 import com.jhssong.errorping.exception.ErrorResponse;
 import jakarta.servlet.http.HttpServletRequest;
+import org.springframework.boot.logging.LogLevel;
 import org.springframework.core.Ordered;
 import org.springframework.core.annotation.Order;
 import org.springframework.http.HttpStatus;
@@ -21,9 +22,23 @@ public class HttpRequestMethodNotSupportedExceptionResolver implements Exception
     public ErrorResponse resolve(Throwable ex, HttpServletRequest request) {
         HttpRequestMethodNotSupportedException e = (HttpRequestMethodNotSupportedException) ex;
         return ErrorResponse.builder()
-                .status(HttpStatus.METHOD_NOT_ALLOWED.value())
+                .status(HttpStatus.METHOD_NOT_ALLOWED)
                 .title("지원되지 않는 요청 메서드입니다.")
                 .message(e.getMessage())
                 .build();
+    }
+
+    @Override
+    public LogLevel logLevel() {
+        return LogLevel.INFO;
+    }
+
+    @Override
+    public String logMessage(ErrorResponse er, HttpServletRequest request) {
+        return String.format("[MethodNotSupported] status=%s method=%s uri=%s message=%s",
+                er.getStatus(),
+                request.getMethod(),
+                request.getRequestURI(),
+                er.getMessage());
     }
 }

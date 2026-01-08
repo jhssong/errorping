@@ -2,6 +2,7 @@ package com.jhssong.errorping.exception.resolver;
 
 import com.jhssong.errorping.exception.ErrorResponse;
 import jakarta.servlet.http.HttpServletRequest;
+import org.springframework.boot.logging.LogLevel;
 import org.springframework.core.Ordered;
 import org.springframework.core.annotation.Order;
 import org.springframework.http.HttpStatus;
@@ -19,9 +20,23 @@ public class IllegalArgumentExceptionResolver implements ExceptionResolver {
     public ErrorResponse resolve(Throwable ex, HttpServletRequest request) {
         IllegalArgumentException e = (IllegalArgumentException) ex;
         return ErrorResponse.builder()
-                .status(HttpStatus.BAD_REQUEST.value())
+                .status(HttpStatus.BAD_REQUEST)
                 .title("잘못된 요청입니다.")
                 .message(e.getMessage())
                 .build();
+    }
+
+    @Override
+    public LogLevel logLevel() {
+        return LogLevel.INFO;
+    }
+
+    @Override
+    public String logMessage(ErrorResponse er, HttpServletRequest request) {
+        return String.format("[IllegalArgument] status=%s method=%s uri=%s message=%s",
+                er.getStatus(),
+                request.getMethod(),
+                request.getRequestURI(),
+                er.getMessage());
     }
 }

@@ -2,6 +2,7 @@ package com.jhssong.errorping.exception.resolver;
 
 import com.jhssong.errorping.exception.ErrorResponse;
 import jakarta.servlet.http.HttpServletRequest;
+import org.springframework.boot.logging.LogLevel;
 import org.springframework.core.Ordered;
 import org.springframework.core.annotation.Order;
 import org.springframework.http.HttpStatus;
@@ -20,9 +21,23 @@ public class AuthenticationExceptionResolver implements ExceptionResolver {
     public ErrorResponse resolve(Throwable ex, HttpServletRequest request) {
         AuthenticationException e = (AuthenticationException) ex;
         return ErrorResponse.builder()
-                .status(HttpStatus.UNAUTHORIZED.value())
+                .status(HttpStatus.UNAUTHORIZED)
                 .title("인증에 실패했습니다.")
                 .message(e.getMessage())
                 .build();
+    }
+
+    @Override
+    public LogLevel logLevel() {
+        return LogLevel.INFO;
+    }
+
+    @Override
+    public String logMessage(ErrorResponse er, HttpServletRequest request) {
+        return String.format("[AuthenticationException] status=%s method=%s uri=%s message=%s",
+                er.getStatus(),
+                request.getMethod(),
+                request.getRequestURI(),
+                er.getMessage());
     }
 }

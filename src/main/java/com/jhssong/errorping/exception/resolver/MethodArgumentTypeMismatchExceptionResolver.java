@@ -2,6 +2,7 @@ package com.jhssong.errorping.exception.resolver;
 
 import com.jhssong.errorping.exception.ErrorResponse;
 import jakarta.servlet.http.HttpServletRequest;
+import org.springframework.boot.logging.LogLevel;
 import org.springframework.core.Ordered;
 import org.springframework.core.annotation.Order;
 import org.springframework.http.HttpStatus;
@@ -28,9 +29,23 @@ public class MethodArgumentTypeMismatchExceptionResolver implements ExceptionRes
         String message = String.format("'%s' 파라미터는 %s 타입이어야 합니다.", paramName, requiredType);
 
         return ErrorResponse.builder()
-                .status(HttpStatus.BAD_REQUEST.value())
+                .status(HttpStatus.BAD_REQUEST)
                 .title("인자 타입이 일치하지 않습니다.")
                 .message(message)
                 .build();
+    }
+
+    @Override
+    public LogLevel logLevel() {
+        return LogLevel.INFO;
+    }
+
+    @Override
+    public String logMessage(ErrorResponse er, HttpServletRequest request) {
+        return String.format("[MethodArgumentTypeMismatch] status=%s method=%s uri=%s message=%s",
+                er.getStatus(),
+                request.getMethod(),
+                request.getRequestURI(),
+                er.getMessage());
     }
 }

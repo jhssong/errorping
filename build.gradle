@@ -77,10 +77,14 @@ dependencies {
     api 'com.fasterxml.jackson.core:jackson-databind'
     api 'com.fasterxml.jackson.core:jackson-annotations'
 
+    // SLF4J
+    api 'org.slf4j:slf4j-api'
+
     // Test
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
     testImplementation 'org.springframework:spring-webmvc'
     testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+    testRuntimeOnly 'ch.qos.logback:logback-classic'
 }
 
 

@@ -2,6 +2,7 @@ package com.jhssong.errorping.exception.resolver;
 
 import com.jhssong.errorping.exception.ErrorResponse;
 import jakarta.servlet.http.HttpServletRequest;
+import org.springframework.boot.logging.LogLevel;
 import org.springframework.core.Ordered;
 import org.springframework.core.annotation.Order;
 import org.springframework.http.HttpStatus;
@@ -20,9 +21,23 @@ public class NoResourceFoundExceptionResolver implements ExceptionResolver {
     public ErrorResponse resolve(Throwable ex, HttpServletRequest request) {
         NoResourceFoundException e = (NoResourceFoundException) ex;
         return ErrorResponse.builder()
-                .status(HttpStatus.NOT_FOUND.value())
+                .status(HttpStatus.NOT_FOUND)
                 .title("요청한 리소스를 찾을 수 없습니다.")
                 .message(e.getMessage())
                 .build();
+    }
+
+    @Override
+    public LogLevel logLevel() {
+        return LogLevel.INFO;
+    }
+
+    @Override
+    public String logMessage(ErrorResponse er, HttpServletRequest request) {
+        return String.format("[NoResourceFound] status=%s method=%s uri=%s message=%s",
+                er.getStatus(),
+                request.getMethod(),
+                request.getRequestURI(),
+                er.getMessage());
     }
 }
