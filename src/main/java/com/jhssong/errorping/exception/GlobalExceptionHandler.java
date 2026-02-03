@@ -30,7 +30,8 @@ public class GlobalExceptionHandler {
     private void log(
             LogLevel level,
             ErrorResponse er,
-            HttpServletRequest request
+            HttpServletRequest request,
+            Exception ex
     ) {
         String message = String.format("[%s] method=%s uri=%s message=%s",
                 er.getTitle(),
@@ -41,8 +42,9 @@ public class GlobalExceptionHandler {
             case TRACE -> log.trace(message);
             case DEBUG -> log.debug(message);
             case INFO -> log.info(message);
-            case WARN -> log.warn(message);
-            case ERROR -> log.error(message);
+            case WARN -> log.warn(message, ex);
+            case ERROR -> log.error(message, ex);
+            case FATAL -> log.error("[FATAL] {}", message, ex);
         }
     }
 
@@ -57,7 +59,7 @@ public class GlobalExceptionHandler {
             ErrorResponse errorResponse = resolver.resolve(ex, request);
 
             // log 메세지 출력
-            log(resolver.logLevel(), errorResponse, request);
+            log(resolver.logLevel(), errorResponse, request, ex);
 
             if (resolver.shouldAlert(ex)) {
                 errorpingService.sendErrorToDiscord(errorResponse, request);
@@ -71,7 +73,7 @@ public class GlobalExceptionHandler {
                 .title("알 수 없는 에러가 발생했습니다.")
                 .message(ex.getMessage())
                 .build();
-        log(LogLevel.ERROR, errorResponse, request);
+        log(LogLevel.ERROR, errorResponse, request, ex);
 
         return errorResponse.toResponseEntity();
     }
