@@ -12,6 +12,7 @@ import org.springframework.stereotype.Component;
 @Component
 @Order(Ordered.HIGHEST_PRECEDENCE)
 public class AuthenticationExceptionResolver implements ExceptionResolver {
+
     @Override
     public boolean support(Throwable ex) {
         return ex instanceof AuthenticationException;
@@ -29,15 +30,6 @@ public class AuthenticationExceptionResolver implements ExceptionResolver {
 
     @Override
     public LogLevel logLevel() {
-        return LogLevel.INFO;
-    }
-
-    @Override
-    public String logMessage(ErrorResponse er, HttpServletRequest request) {
-        return String.format("[AuthenticationException] status=%s method=%s uri=%s message=%s",
-                er.getStatus(),
-                request.getMethod(),
-                request.getRequestURI(),
-                er.getMessage());
+        return LogLevel.WARN;
     }
 }

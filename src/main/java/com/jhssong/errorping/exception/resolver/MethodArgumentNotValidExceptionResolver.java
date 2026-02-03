@@ -81,13 +81,4 @@ public class MethodArgumentNotValidExceptionResolver implements ExceptionResolve
     public LogLevel logLevel() {
         return LogLevel.INFO;
     }
-
-    @Override
-    public String logMessage(ErrorResponse er, HttpServletRequest request) {
-        return String.format("[MethodArgumentNotValid] status=%s method=%s uri=%s message=%s",
-                er.getStatus(),
-                request.getMethod(),
-                request.getRequestURI(),
-                er.getMessage());
-    }
 }

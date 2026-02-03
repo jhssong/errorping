@@ -39,13 +39,4 @@ public class MethodArgumentTypeMismatchExceptionResolver implements ExceptionRes
     public LogLevel logLevel() {
         return LogLevel.INFO;
     }
-
-    @Override
-    public String logMessage(ErrorResponse er, HttpServletRequest request) {
-        return String.format("[MethodArgumentTypeMismatch] status=%s method=%s uri=%s message=%s",
-                er.getStatus(),
-                request.getMethod(),
-                request.getRequestURI(),
-                er.getMessage());
-    }
 }

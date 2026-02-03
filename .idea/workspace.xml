@@ -5,9 +5,17 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="7e8e1de9-8e0d-4073-bffa-bcaaae11fe13" name="Changes" comment="feat: Add log message output to global exception handler">
-      <change afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/assets/errorping-logo.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/jhssong/errorping/exception/ErrorResponse.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/jhssong/errorping/exception/ErrorResponse.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/jhssong/errorping/exception/GlobalExceptionHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/jhssong/errorping/exception/GlobalExceptionHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/jhssong/errorping/exception/resolver/AccessDeniedExceptionResolver.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/jhssong/errorping/exception/resolver/AccessDeniedExceptionResolver.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/jhssong/errorping/exception/resolver/AuthenticationExceptionResolver.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/jhssong/errorping/exception/resolver/AuthenticationExceptionResolver.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/jhssong/errorping/exception/resolver/ExceptionResolver.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/jhssong/errorping/exception/resolver/ExceptionResolver.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/jhssong/errorping/exception/resolver/HttpRequestMethodNotSupportedExceptionResolver.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/jhssong/errorping/exception/resolver/HttpRequestMethodNotSupportedExceptionResolver.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/jhssong/errorping/exception/resolver/IllegalArgumentExceptionResolver.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/jhssong/errorping/exception/resolver/IllegalArgumentExceptionResolver.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/jhssong/errorping/exception/resolver/MethodArgumentNotValidExceptionResolver.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/jhssong/errorping/exception/resolver/MethodArgumentNotValidExceptionResolver.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/jhssong/errorping/exception/resolver/MethodArgumentTypeMismatchExceptionResolver.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/jhssong/errorping/exception/resolver/MethodArgumentTypeMismatchExceptionResolver.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/jhssong/errorping/exception/resolver/NoResourceFoundExceptionResolver.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/jhssong/errorping/exception/resolver/NoResourceFoundExceptionResolver.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -169,7 +177,12 @@
       <workItem from="1767455011774" duration="8064000" />
       <workItem from="1767495559900" duration="598000" />
       <workItem from="1767757789553" duration="20985000" />
-      <workItem from="1767859885291" duration="2500000" />
+      <workItem from="1767859885291" duration="2592000" />
+      <workItem from="1767880789023" duration="10000" />
+      <workItem from="1768141246665" duration="67000" />
+      <workItem from="1768142195285" duration="1590000" />
+      <workItem from="1768352021181" duration="4000" />
+      <workItem from="1770124644399" duration="4122000" />
     </task>
     <task id="LOCAL-00001" summary="feat: Add log message output to global exception handler">
       <option name="closed" value="true" />

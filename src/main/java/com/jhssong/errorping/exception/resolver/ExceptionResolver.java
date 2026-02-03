@@ -11,9 +11,7 @@ public interface ExceptionResolver {
     ErrorResponse resolve(Throwable ex, HttpServletRequest request);
 
     LogLevel logLevel();
-
-    String logMessage(ErrorResponse er, HttpServletRequest request);
-
+    
     default boolean shouldAlert(Throwable ex) {
         return false;
     }

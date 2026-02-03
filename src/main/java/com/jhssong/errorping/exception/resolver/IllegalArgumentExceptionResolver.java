@@ -11,6 +11,7 @@ import org.springframework.stereotype.Component;
 @Component
 @Order(Ordered.HIGHEST_PRECEDENCE)
 public class IllegalArgumentExceptionResolver implements ExceptionResolver {
+
     @Override
     public boolean support(Throwable ex) {
         return ex instanceof IllegalArgumentException;
@@ -29,14 +30,5 @@ public class IllegalArgumentExceptionResolver implements ExceptionResolver {
     @Override
     public LogLevel logLevel() {
         return LogLevel.INFO;
-    }
-
-    @Override
-    public String logMessage(ErrorResponse er, HttpServletRequest request) {
-        return String.format("[IllegalArgument] status=%s method=%s uri=%s message=%s",
-                er.getStatus(),
-                request.getMethod(),
-                request.getRequestURI(),
-                er.getMessage());
     }
 }

@@ -32,13 +32,4 @@ public class HttpRequestMethodNotSupportedExceptionResolver implements Exception
     public LogLevel logLevel() {
         return LogLevel.INFO;
     }
-
-    @Override
-    public String logMessage(ErrorResponse er, HttpServletRequest request) {
-        return String.format("[MethodNotSupported] status=%s method=%s uri=%s message=%s",
-                er.getStatus(),
-                request.getMethod(),
-                request.getRequestURI(),
-                er.getMessage());
-    }
 }

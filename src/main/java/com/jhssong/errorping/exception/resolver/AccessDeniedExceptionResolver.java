@@ -12,6 +12,7 @@ import org.springframework.stereotype.Component;
 @Component
 @Order(Ordered.HIGHEST_PRECEDENCE)
 public class AccessDeniedExceptionResolver implements ExceptionResolver {
+
     @Override
     public boolean support(Throwable ex) {
         return ex instanceof AccessDeniedException;
@@ -29,15 +30,6 @@ public class AccessDeniedExceptionResolver implements ExceptionResolver {
 
     @Override
     public LogLevel logLevel() {
-        return LogLevel.INFO;
-    }
-
-    @Override
-    public String logMessage(ErrorResponse er, HttpServletRequest request) {
-        return String.format("[AccessDenied] status=%s method=%s uri=%s message=%s",
-                er.getStatus(),
-                request.getMethod(),
-                request.getRequestURI(),
-                er.getMessage());
+        return LogLevel.WARN;
     }
 }
