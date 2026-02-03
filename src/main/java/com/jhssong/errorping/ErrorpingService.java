@@ -3,6 +3,7 @@ package com.jhssong.errorping;
 import com.jhssong.errorping.exception.ErrorResponse;
 import jakarta.servlet.http.HttpServletRequest;
 import java.net.URI;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Map;
 import org.springframework.http.MediaType;
@@ -43,7 +44,7 @@ public class ErrorpingService {
                                                 "value", URI.create(request.getRequestURI())
                                         )
                                 ),
-                                "timestamp", errorResponse.getTimestamp().toString()
+                                "timestamp", LocalDateTime.now().toString()
                         )
                 )
         );

@@ -4,18 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="7e8e1de9-8e0d-4073-bffa-bcaaae11fe13" name="Changes" comment="feat: Add log message output to global exception handler">
+    <list default="true" id="7e8e1de9-8e0d-4073-bffa-bcaaae11fe13" name="Changes" comment="feat: Remove unnecessary field in ErrorResponse">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/jhssong/errorping/exception/ErrorResponse.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/jhssong/errorping/exception/ErrorResponse.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/jhssong/errorping/exception/GlobalExceptionHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/jhssong/errorping/exception/GlobalExceptionHandler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/jhssong/errorping/exception/resolver/AccessDeniedExceptionResolver.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/jhssong/errorping/exception/resolver/AccessDeniedExceptionResolver.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/jhssong/errorping/exception/resolver/AuthenticationExceptionResolver.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/jhssong/errorping/exception/resolver/AuthenticationExceptionResolver.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/jhssong/errorping/exception/resolver/ExceptionResolver.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/jhssong/errorping/exception/resolver/ExceptionResolver.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/jhssong/errorping/exception/resolver/HttpRequestMethodNotSupportedExceptionResolver.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/jhssong/errorping/exception/resolver/HttpRequestMethodNotSupportedExceptionResolver.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/jhssong/errorping/exception/resolver/IllegalArgumentExceptionResolver.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/jhssong/errorping/exception/resolver/IllegalArgumentExceptionResolver.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/jhssong/errorping/exception/resolver/MethodArgumentNotValidExceptionResolver.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/jhssong/errorping/exception/resolver/MethodArgumentNotValidExceptionResolver.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/jhssong/errorping/exception/resolver/MethodArgumentTypeMismatchExceptionResolver.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/jhssong/errorping/exception/resolver/MethodArgumentTypeMismatchExceptionResolver.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/jhssong/errorping/exception/resolver/NoResourceFoundExceptionResolver.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/jhssong/errorping/exception/resolver/NoResourceFoundExceptionResolver.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/jhssong/errorping/ErrorpingService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/jhssong/errorping/ErrorpingService.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -182,7 +173,7 @@
       <workItem from="1768141246665" duration="67000" />
       <workItem from="1768142195285" duration="1590000" />
       <workItem from="1768352021181" duration="4000" />
-      <workItem from="1770124644399" duration="4122000" />
+      <workItem from="1770124644399" duration="4983000" />
     </task>
     <task id="LOCAL-00001" summary="feat: Add log message output to global exception handler">
       <option name="closed" value="true" />
@@ -192,7 +183,23 @@
       <option name="project" value="LOCAL" />
       <updated>1767854839101</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="feat: Make GlobalExceptionHandler to print log message">
+      <option name="closed" value="true" />
+      <created>1770128832882</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1770128832882</updated>
+    </task>
+    <task id="LOCAL-00003" summary="feat: Remove unnecessary field in ErrorResponse">
+      <option name="closed" value="true" />
+      <created>1770128850172</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1770128850172</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -200,7 +207,9 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="feat: Add log message output to global exception handler" />
-    <option name="LAST_COMMIT_MESSAGE" value="feat: Add log message output to global exception handler" />
+    <MESSAGE value="feat: Make GlobalExceptionHandler to print log message" />
+    <MESSAGE value="feat: Remove unnecessary field in ErrorResponse" />
+    <option name="LAST_COMMIT_MESSAGE" value="feat: Remove unnecessary field in ErrorResponse" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
