@@ -1,0 +1,8 @@
+<included>
+
+    <property name="COMMON_CONSOLE_PATTERN"
+              value="%clr(%d{yyyy-MM-dd HH:mm:ss.SSS}){faint} %clr(${level:-%5p}) %clr(%-40.40logger{39}){cyan} %m%n%wEx"/>
+    <property name="COMMON_FILE_PATTERN"
+              value="[%d{yyyy-MM-dd HH:mm:ss.SSS}] ${level:-%5p} %-40.40logger{39} %m%n%wEx"/>
+
+</included>

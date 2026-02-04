@@ -1,0 +1,9 @@
+<included>
+
+    <conversionRule conversionWord="clr"
+                    class="org.springframework.boot.logging.logback.ColorConverter"/>
+
+    <conversionRule conversionWord="wEx"
+                    class="org.springframework.boot.logging.logback.WhitespaceThrowableProxyConverter"/>
+
+</included>
