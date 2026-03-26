@@ -1,14 +1,16 @@
 package com.jhssong.errorping;
 
-import com.jhssong.errorping.exception.ErrorResponse;
 import jakarta.servlet.http.HttpServletRequest;
-import java.net.URI;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Map;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.web.reactive.function.client.WebClient;
 
+@Slf4j
 public class ErrorpingService {
 
     private final ErrorpingProperties properties;
@@ -19,32 +21,34 @@ public class ErrorpingService {
         this.webClient = WebClient.create();
     }
 
-    public void sendErrorToDiscord(ErrorResponse errorResponse, HttpServletRequest request) {
+    public void sendErrorToDiscord(Exception e, HttpStatus status, HttpServletRequest request, String message) {
+        String now = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss.SSS"));
+        String requestUrl = request.getRequestURL().toString();
+        String method = request.getMethod();
+        String exceptionClass = e != null ? e.getClass().getSimpleName() : "Unknown";
+
+        String description = """
+                **Error occurred! (%s)**
+                
+                **Status Code**
+                %d (%s)
+                
+                **Exception**
+                %s
+                
+                **Request URL**
+                [%s] %s
+                
+                **Error Message**
+                %s
+                """
+                .formatted(now, status.value(), status.getReasonPhrase(), exceptionClass, method, requestUrl, message);
+
         Map<String, Object> payload = Map.of(
                 "embeds", List.of(
                         Map.of(
-                                "title",
-                                "🚨 " + (errorResponse.getTitle() != null ? errorResponse.getTitle() : "Unknown Error"),
-                                "description", errorResponse.getMessage() != null ? errorResponse.getMessage()
-                                        : "*No detail provided.*",
-                                "color", errorResponse.getStatus().value() >= 500 ? 0xFF0000 : 0xFFD700,
-                                "fields", List.of(
-                                        Map.of(
-                                                "name", "Status Code",
-                                                "value", String.valueOf(errorResponse.getStatus().value()),
-                                                "inline", true
-                                        ),
-                                        Map.of(
-                                                "name", "Method",
-                                                "value", request.getMethod() != null ? request.getMethod() : "`N/A`",
-                                                "inline", true
-                                        ),
-                                        Map.of(
-                                                "name", "Instance",
-                                                "value", URI.create(request.getRequestURI())
-                                        )
-                                ),
-                                "timestamp", LocalDateTime.now().toString()
+                                "color", status.value() >= 500 ? 0xFF0000 : 0xFFD700,
+                                "description", description
                         )
                 )
         );
@@ -55,7 +59,10 @@ public class ErrorpingService {
                 .bodyValue(payload)
                 .retrieve()
                 .toBodilessEntity()
-                .block();
+                .subscribe(
+                        response -> log.debug("[Errorping] Discord webhook sent successfully"),
+                        error -> log.error("[Errorping] Failed to send message to Discord", error)
+                );
     }
 
 
