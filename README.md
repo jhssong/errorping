@@ -81,4 +81,34 @@ errorping:
 
 ### Example
 
-For more examples, check [errorping-example](https://github.com/jhssong/errorping-example)
+Inject `ErrorpingService` into your `@RestControllerAdvice` and call `sendErrorToDiscord` inside each
+exception handler:
+
+```java
+@Slf4j
+@RestControllerAdvice
+@RequiredArgsConstructor
+public class GlobalExceptionHandler {
+
+    private final ErrorpingService errorpingService;
+
+    @ExceptionHandler(MethodArgumentNotValidException.class)
+    protected ResponseEntity<Void> handleMethodArgumentNotValidException(MethodArgumentNotValidException e,
+                                                                         HttpServletRequest request) {
+        String message = e.getBindingResult().getAllErrors().get(0).getDefaultMessage();
+        log.info("[400] Validation Failed: {}", message);
+        errorpingService.sendErrorToDiscord(e, HttpStatus.BAD_REQUEST, request, message);
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
+    }
+
+    @ExceptionHandler(Exception.class)
+    protected ResponseEntity<Void> handleException(Exception e, HttpServletRequest request) {
+        log.error("[500] Internal Server Error", e);
+        errorpingService.sendErrorToDiscord(e, HttpStatus.INTERNAL_SERVER_ERROR, request, e.getMessage());
+        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+    }
+}
+```
+
+For a full `GlobalExceptionHandler` covering more exception types and additional
+usage patterns, check [errorping-example](https://github.com/jhssong/errorping-example).
