@@ -13,4 +13,8 @@ import org.springframework.validation.annotation.Validated;
 public class ErrorpingProperties {
     @NotBlank
     private String discordWebhookUrl;
+
+    private String discordUsername = "Errorping";
+
+    private String discordAvatarUrl = "https://raw.githubusercontent.com/jhssong/errorping/main/assets/errorping-logo.png";
 }

@@ -3,8 +3,10 @@ package com.jhssong.errorping;
 import jakarta.servlet.http.HttpServletRequest;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import org.springframework.util.StringUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -44,14 +46,19 @@ public class ErrorpingService {
                 """
                 .formatted(now, status.value(), status.getReasonPhrase(), exceptionClass, method, requestUrl, message);
 
-        Map<String, Object> payload = Map.of(
-                "embeds", List.of(
-                        Map.of(
-                                "color", status.value() >= 500 ? 0xFF0000 : 0xFFD700,
-                                "description", description
-                        )
+        Map<String, Object> payload = new HashMap<>();
+        payload.put("embeds", List.of(
+                Map.of(
+                        "color", status.value() >= 500 ? 0xFF0000 : 0xFFD700,
+                        "description", description
                 )
-        );
+        ));
+        if (StringUtils.hasText(properties.getDiscordUsername())) {
+            payload.put("username", properties.getDiscordUsername());
+        }
+        if (StringUtils.hasText(properties.getDiscordAvatarUrl())) {
+            payload.put("avatar_url", properties.getDiscordAvatarUrl());
+        }
 
         webClient.post()
                 .uri(properties.getDiscordWebhookUrl())
